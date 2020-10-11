@@ -111,11 +111,9 @@ var userGame = function(username){
 
 function getUUID(){
   let playerID = localStorage.getItem("uuid");
-  console.log(playerID);
   if(playerID){
     playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
     localStorage.setItem("uuid", playerID);
-    console.log(playerID);
   }
   
   return playerID;
@@ -129,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function(event){
   document.getElementById("reset").style.display = "none";
   document.getElementById("logout").style.display = "none";
   let playerID = getUUID();
-  console.log(playerID);
+  document.getElementById("user").innerText = `User: ${playerID}`;
   
   firebase.auth().onAuthStateChanged(user => {
     if(!!user){
