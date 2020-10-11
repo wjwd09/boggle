@@ -121,13 +121,13 @@ document.addEventListener("DOMContentLoaded", function(event){
   if(!playerID){
     playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
     localStorage.setItem("uuid", playerID);
-    document.getElementById("user").innerText = `uuid - ${playerID}`;
+    document.getElementById("user").innerText = `User: uuid-${playerID}`;
   }
   
   firebase.auth().onAuthStateChanged(user => {
     if(!!user){
       playerID = user.displayName.split(' ')[0];
-      document.getElementById("user").innerText = playerID;
+      document.getElementById("user").innerText = `User: ${playerID}`;
     }
   });
   
