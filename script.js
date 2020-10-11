@@ -119,8 +119,9 @@ document.addEventListener("DOMContentLoaded", function(event){
   let playerID = localStorage.getItem("uuid");
   
   if(!playerID){
-    uuid = `uuid-${Math.floor(10000000000*Math.random())}`;
+    playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
     localStorage.setItem("uuid", playerID);
+    document.getElementById("user").innerText = `uuid - ${playerID}`;
   }
   
   firebase.auth().onAuthStateChanged(user => {
