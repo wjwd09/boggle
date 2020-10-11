@@ -125,7 +125,6 @@ function getUUID(){
 document.addEventListener("DOMContentLoaded", function(event){
   var googleLogin = new firebase.auth.GoogleAuthProvider();
   document.getElementById("reset").style.display = "none";
-  document.getElementById("logout").style.display = "none";
   let playerID = getUUID();
   document.getElementById("user").innerText = `User: ${playerID}`;
   
