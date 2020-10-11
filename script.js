@@ -111,7 +111,7 @@ var userGame = function(username){
 
 function getUUID(){
   let playerID = localStorage.getItem("uuid");
-  if(!playerID){
+  if(playerID == null){
     playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
     localStorage.setItem("uuid", playerID);
     console.log(playerID);
