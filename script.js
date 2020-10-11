@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function(event){
   });
   
   document.getElementById("login").addEventListener("click", function(){
-    firebase.auth().signInWithPopup(googleLogin).catch(function(error){
+    firebase.auth().signInWithRedirect(googleLogin).catch(function(error){
       console.log(error.code);
       console.log(error.message);
     });
