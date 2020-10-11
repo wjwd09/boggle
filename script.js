@@ -126,13 +126,16 @@ document.addEventListener("DOMContentLoaded", function(event){
   firebase.auth().onAuthStateChanged(user => {
     if(!!user){
       playerID = user.displayName.split(' ')[0];
+      document.getElementById("user").innerText = playerID;
     }
   });
   
   document.getElementById("login").addEventListener("click", function(){
+    document.getElementById("login").style.display = "none";
     firebase.auth().signInWithRedirect(googleLogin).catch(function(error){
       console.log(error.code);
       console.log(error.message);
+      document.getElementById("login").style.display = "block";
     });
   });
   
@@ -142,7 +145,5 @@ document.addEventListener("DOMContentLoaded", function(event){
     document.getElementById("reset").style.display = "block";
     var game = new userGame(playerID);
   })
-  /**myDatabase.ref("lookup").child("ehlo").once('value', ss=>{
-                                               alert(ss.val());
-                                               });**/
+  
 });
