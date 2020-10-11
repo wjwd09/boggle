@@ -124,15 +124,13 @@ function getUUID(){
 document.addEventListener("DOMContentLoaded", function(event){
   var googleLogin = new firebase.auth.GoogleAuthProvider();
   document.getElementById("reset").style.display = "none";
+  document.getElementById("logout").style.display = "none";
   let playerID = getUUID();
+  console.log(playerID);
   
   firebase.auth().onAuthStateChanged(user => {
     if(!!user){
       playerID = user.displayName.split(' ')[0];
-      document.getElementById("user").innerText = `User: ${playerID}`;
-    }
-    else if(!user){
-      playerID = getUUID();
       document.getElementById("user").innerText = `User: ${playerID}`;
     }
   });
