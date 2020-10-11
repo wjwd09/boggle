@@ -109,6 +109,14 @@ var userGame = function(username){
   document.getElementById("reset").addEventListener("click", resetGame);
 }
 
+function getUUID(){
+  let playerID = localStorage.getItem("uuid");
+  if(!playerID){
+    playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
+    localStorage.setItem("uuid", playerID);
+  }
+  return playerID;
+}
 
 
 
@@ -116,17 +124,15 @@ var userGame = function(username){
 document.addEventListener("DOMContentLoaded", function(event){
   var googleLogin = new firebase.auth.GoogleAuthProvider();
   document.getElementById("reset").style.display = "none";
-  let playerID = localStorage.getItem("uuid");
-  
-  if(!playerID){
-    playerID = `uuid-${Math.floor(10000000000*Math.random())}`;
-    localStorage.setItem("uuid", playerID);
-    document.getElementById("user").innerText = `User: uuid-${playerID}`;
-  }
+  let playerID = getUUID();
   
   firebase.auth().onAuthStateChanged(user => {
     if(!!user){
       playerID = user.displayName.split(' ')[0];
+      document.getElementById("user").innerText = `User: ${playerID}`;
+    }
+    else if(!user){
+      playerID = getUUID();
       document.getElementById("user").innerText = `User: ${playerID}`;
     }
   });
@@ -149,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     firebase.auth().signOut();
     document.getElementById("login").style.display = "block";
     document.getElementById("logout").style.display = "none";
-    document.getElementById("user").innerText = `User: uuid-${localStorage.getItem("uuid")}`;
+    playerID = getUUID();
+    document.getElementById("user").innerText = `User: ${getUUID()}`;
   });
   
   document.getElementById("startGame").addEventListener("click", function(){
