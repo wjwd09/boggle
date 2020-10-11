@@ -133,12 +133,24 @@ document.addEventListener("DOMContentLoaded", function(event){
   
   document.getElementById("login").addEventListener("click", function(){
     document.getElementById("login").style.display = "none";
+    document.getElementById("logout").style.display = "block";
     firebase.auth().signInWithRedirect(googleLogin).catch(function(error){
+      if(error){
+        document.getElementById("login").style.display = "block";
+        document.getElementById("logout").style.display = "none";
+      }
       console.log(error.code);
       console.log(error.message);
-      document.getElementById("login").style.display = "block";
+      
     });
   });
+  
+  document.getElementById("logout").addEventListener("click", function(){
+    firebase.auth().signOut();
+    document.getElementById("login").style.display = "block";
+    document.getElementById("logout").style.display = "none";
+    document.getElementById("user").innerText = `User: uuid-${localStorage.getItem("uuid")}`;
+  }
   
   document.getElementById("startGame").addEventListener("click", function(){
     document.getElementById("login").style.display = "none";
